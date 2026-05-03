@@ -1,0 +1,240 @@
+---
+title: "Atelier Topic Modeling"
+subtitle: "Découvrir Bertopic et le pouvoir des encodeurs"
+author: "Axel Morin - Émilien Schultz (CREST/CSS@IPP)"
+date: 07/05/2026
+format: 
+    revealjs:
+        slide-number: true
+        fontsize: 25pt
+---
+
+
+## Objectifs
+
+- Un package Python spécifique : **Bertopic**
+- Prétexte de parler des LLMs et de la représentation sémantique
+- Et mettre la main à la pâte
+
+*Une réflexion initiée autour d'un tutorial [The General Inquirer in the time of LLMs: a BERTopic tutorial
+](https://css-polytechnique.github.io/css-ipp-materials/pages/bertopic-tutorial.html)*
+
+---
+
+## Petit tour de table
+
+- Qui a déjà fait du topic modeling ?
+- Qui a des notions en Python ?
+- Qui est à l'aise avec un notebook ?
+- Avez-vous déjà en tête des objectifs ?
+
+---
+
+## Déroulement
+
+- Petite introduction topic analysis/encodeurs
+- Etat des lieux du package Bertopic
+- Faire une analyse complète
+- Tips avancées & Discussion sur vos usages
+
+
+# Topic analysis & Bertopic
+
+## Topic models
+
+Méthodes non supervisées pour identifier des structures latentes thématiques dans un ensemble de documents.
+
+- Un corpus +/- grand de textes
+- Différentes tâches
+    - Lister les thèmes existants
+    - Attribuer un/plusieurs thèmes par document
+    - Produire des résumés/visualisations
+- Différentes méthodes
+    - Regex, Latent Dirichlet Allocation, Non-Negative Matrix Factorization, etc.
+
+---
+
+## Quand les utiliser ?
+
+- Exploratoire : avoir une vision générale de son corpus (surtout quand il est large), identifier les outlayers, mieux anticiper le filtrage, ...
+- En cours d'analyse : sélectionner une diversité de source, avoir des catégories pour annoter ses éléments, ...
+- Confirmatoire : mettre à l'épreuve un cadre d'analyse
+
+Une interface quanti (corpus) / quali (thèmes)
+
+
+---
+
+## Des familles très différentes
+
+- Extraire des classes latentes
+    - Un document peut être un mélange de différentes classes
+    - Iramuteq, LDA, ...
+- Regrouper les textes semblables dans des mêmes groupes
+    - Chaque document a un groupe
+    - Bertopic
+
+« BERTopic was ranked first by 8 out of 12 participants (67%), LDA by 3 out of 12 participants (25%), and NMF by 1 out of 12 participants (8%). » ([Kaur et Wallace, 2024, p. 11](zotero://select/library/items/7PY7MLWK)) ([pdf](zotero://open-pdf/library/items/JBUIEGJE?page=11&annotation=R9HLNF9T))
+
+---
+
+## Au coeur : la représentation des textes
+
+- Approche par les mots - sac de mots ou de n-grams (DTM, TF-IDF, ...)
+- Approches par les plongements sémantiques
+
+![](./img/representation){fig-align="center"}
+
+---
+
+## Un mot sur les plongements sémantiques
+
+Ou **embeddings** avec représentation du contexte
+
+![](./img/similarity){fig-align="center"}
+
+Ce ne sont plus les mots, mais les sens des mots/phrases
+
+---
+
+## Brique centrale : les modèles encodeurs
+
+- Modèles pré-entrainés
+    - Sur des corpus/langues
+- De nombreux modèles open weights/open source
+    - Par exemple HuggingFace
+    - Tailles, génération, ...
+- Des contraintes
+    - GPU
+    - Fenêtre de contexte
+
+---
+
+## Bertopic dans tout ça ?
+
+Un package Python qui facilite la manipulation de ces distances sémantiques pour extraire des thèmes (et faire plein d'autres choses : visualiser, etc.)
+
+![](./img/bertopicpage.png){fig-align="center"}
+
+« they valued BERTopic’s ability to uncover hidden connections, emphasizing the need for meaningful, comprehensive analysis tools that support their research objectives and enhance data interpretation » ([Kaur et Wallace, 2024, p. 2](zotero://select/library/items/7PY7MLWK)) ([pdf](zotero://open-pdf/library/items/JBUIEGJE?page=2&annotation=ZZRXF56E))
+
+---
+
+## La philosophie du package
+
+- tirer parti des embeddings / BERT
+    - `sentence-transformers`
+- réfléchir la représentation des clusters au-delà du centroid
+- des sorties graphiques visuelles faciles à intérpéter
+- favoriser la modularité
+
+Grootendorst, Maarten. 2022. « BERTopic: Neural Topic Modeling with a Class-Based TF-IDF Procedure ». arXiv:2203.05794. Prépublication, arXiv, mars 11. https://doi.org/10.48550/arXiv.2203.05794.
+
+
+---
+
+## Ce qu'il fait
+
+Un pipeline de méthodes de machine learning
+
+![](img/bertopic-default.svg){fig-align="center"}
+
+---
+
+## Qui permettent la modularité
+
+Et donc de s'adapter aux enjeux spécifiques du traitement
+
+![](img/bertopic-modularity.svg){fig-align="center"}
+
+--
+
+## Une adoption en croissance
+
+![](./img/scopus.png){fig-align="center"}
+
+
+---
+
+## Quelques débats ... pas toujours très justes
+
+![](img/bs-bertopiclda.png){fig-align="center"}
+
+ex *TopicGPT: A Prompt-based Topic Modeling Framework* : paramètres par défaut sans aucune réflexion sur le fonctionnement du package.
+
+---
+
+## De bonnes raisons de tester Bertopic (au moins)
+
+- Package bien pensé et facile d'usage
+- Mobilise la puissance des modèles pré-entrainés
+- Hautement configurable pour les cas particulier
+- Tire parti des modèles BERT récents
+
+
+# Passer à la pratique
+
+
+## Le cas d'usage
+
+---
+
+## Les ressources
+
+- [Corpus sur Zenodo](https://zenodo.org/records/17936091)
+
+---
+
+## Exécuter du code
+
+- Sur votre ordinateur : anaconda, uv, etc.
+- Sur un service : [SSPCloud](https://datalab.sspcloud.fr/), [Google Colab](https://colab.research.google.com/), etc.
+
+---
+
+## Commencer par la version simple
+
+
+---
+
+## Aller vers la version avancée
+
+
+---
+
+## Annexe : Evaluer les topic models
+
+Une histoire compliquée « standard metrics may not reliably reflect human perception of coherence in specialized fields » ([Prouteau et al., 2026, p. 8](zotero://select/library/items/C82A8VFG)) ([pdf](zotero://open-pdf/library/items/TG8C8RFU?page=8&annotation=MWE32PG3))
+
+![](img/evaluation.png){fig-align="center"}
+
+---
+
+## Annexe : Quelques limites/discussion
+
+- Dépendance au modèles :
+    - biais, zones aveugles, etc.
+    - comment comparer
+- De nombreux paramètres qui nécessitent d'être au clair 
+- Nécessite des infrastructures pour scale
+- « First, BERTopic assumes that each document only contains a single topic which does not reflect the reality that documents may contain multiple topics. » ([Grootendorst, 2022, p. 8](zotero://select/library/items/5U4PXYBD)) ([pdf](zotero://open-pdf/library/items/QHZSJIAA?page=8&annotation=GK2XMW4K))
+
+---
+
+## Annexe : Utiliser ActiveTigger
+
+![](img/at.png){fig-align="center"}
+
+
+# Mettre en forme son corpus
+
+## Avant Bertopic
+
+- Des documents dans des formats différents
+- Des longueurs variables
+    - Limite de la fenêtre de contexte
+- Du nettoyage à faire
+
+---
+
+## Comment découper son corpus ?
