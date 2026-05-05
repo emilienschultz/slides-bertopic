@@ -7,6 +7,7 @@ format:
     revealjs:
         slide-number: true
         fontsize: 1.5rem
+        css: styles.css
 ---
 
 ## Objectifs
@@ -14,16 +15,36 @@ format:
 - Un package Python spécifique : **Bertopic**
 - Prétexte de parler des LLMs et de la représentation sémantique
 - Et mettre la main à la pâte
+    - Appréhender la pipeline et se familiariser avec les grandes étapes 
+    - Identifier les lignes de codes clefs 
+    - Identifier les ressources de formation disponibles 
 
 *Une réflexion initiée autour d'un tutorial [The General Inquirer in the time of LLMs: a BERTopic tutorial
 ](https://css-polytechnique.github.io/css-ipp-materials/pages/bertopic-tutorial.html)*
 
 ## Petit tour de table
 
-- Qui a déjà fait du topic modeling ?
-- Qui a des notions en Python ?
-- Qui est à l'aise avec un notebook ?
-- Avez-vous déjà en tête des objectifs ?
+<div style="width:100%;display: flex;justify-content: center;align-items: center;">
+Qui a déjà fait du topic modeling ? Qui a de l'expérience avec les méthodes de NLP ? 
+</div>
+
+. . .
+
+<div style="width:100%;display: flex;justify-content: center;align-items: center;">
+Qui a des notions en Python ?
+</div>
+
+. . .
+
+<div style="width:100%;display: flex;justify-content: center;align-items: center;">
+Qui est à l'aise avec un notebook ?
+</div>
+
+. . .
+
+<div style="width:100%;display: flex;justify-content: center;align-items: center;">
+Avez-vous déjà en tête des objectifs ?
+</div>
 
 ## Déroulement
 
@@ -37,84 +58,117 @@ format:
 
 ## Topic models
 
-Méthodes non supervisées pour identifier des structures latentes thématiques dans un ensemble de documents.
+<!-- TODO trancher sur la formulation
 
-- Un corpus +/- grand de textes
-- Différentes tâches
+Nouvelle slide propale
+
+- Objectif: identifier des structures latentes thématiques dans un corpus et attribuer un ou plusieurs thème(s) par document. On utilise ces résultats pour produire des résumés et/ou des visualisations
+- Techniques employées: Algorithme Machine Learning dit *non supervisé*, plusieurs solutions: **BERTopic**, Regex, Latent Dirichlet Allocation, Non-Negative Matrix Factorization etc. 
+
+. . . 
+
+Ancienne slide  -->
+
+
+- [Données d'entrée]{.highlight}
+    - Un corpus +/- grand de textes
+- [Différentes tâches]{.highlight}
     - Lister les thèmes existants
     - Attribuer un/plusieurs thèmes par document
     - Produire des résumés/visualisations
-- Différentes méthodes
-    - Regex, Latent Dirichlet Allocation, Non-Negative Matrix Factorization, etc.
+- [Différentes méthodes]{.highlight}
+    - Algorithmes de Machine Learning dits **non supervisées** pour identifier les thèmes du corpus: Regex, Latent Dirichlet Allocation, Non-Negative Matrix Factorization, etc.
+
+
+:::{.notes}
+
+- Introduire le ML en 2 mots
+- Définir supervisé / non supervisé 
+
+:::
 
 ## Quand les utiliser ?
 
-- Exploratoire : avoir une vision générale de son corpus (surtout quand il est large), identifier les outlayers, mieux anticiper le filtrage, ...
-- En cours d'analyse : sélectionner une diversité de source, avoir des catégories pour annoter ses éléments, ...
-- Confirmatoire : mettre à l'épreuve un cadre d'analyse
+- [Exploratoire]{.highlight} : avoir une vision générale de son corpus (surtout quand il est large), identifier les outlayers, mieux anticiper le filtrage, ...
+- [En cours d'analyse]{.highlight} : sélectionner une diversité de source, avoir des catégories pour annoter ses éléments, ...
+- [Confirmatoire]{.highlight} : mettre à l'épreuve un cadre d'analyse
 
 Une interface quanti (corpus) / quali (thèmes)
 
+:::{.notes}
+
+- Illustrer chaque cas par un papier de recherche <!--TODO-->
+@emilienschultz
+
+::: 
+
 ## Des familles très différentes
 
-- Extraire des classes latentes
+- [Extraire des classes latentes]{.highlight}
     - Un document peut être un mélange de différentes classes
     - Iramuteq, LDA, ...
-- Regrouper les textes semblables dans des mêmes groupes
+- [Regrouper les textes semblables dans des mêmes groupes]{.highlight}
     - Chaque document a un groupe
     - Bertopic
 
 « BERTopic was ranked first by 8 out of 12 participants (67%), LDA by 3 out of 12 participants (25%), and NMF by 1 out of 12 participants (8%). » ([Kaur et Wallace, 2024, p. 11](zotero://select/library/items/7PY7MLWK)) ([pdf](zotero://open-pdf/library/items/JBUIEGJE?page=11&annotation=R9HLNF9T))
 
-## Au coeur : la représentation des textes
+## Au coeur : la représentation des textes — jusque 2017
 
 - Approche par les mots - sac de mots ou de n-grams (DTM, TF-IDF, ...)
-- Approches par les plongements sémantiques
 
-![A Visual Guide to Using BERT for the First Time - Jay Alammar, [source](https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/)](./img/representation){fig-align="center"}
+:::{.callout-tip}
 
-## Un mot sur les plongements sémantiques
+Exemple de représentation de textes par sac de mots: 
 
-Ou **embeddings** avec représentation du contexte
+- "My cat is the cutest.",
+- "Offer your cat premium food.",
 
-![](./img/similarity){fig-align="center"}
-
-Ce ne sont plus les mots, mais les sens des mots/phrases
-
-## Brique centrale : les modèles encodeurs
-
-- Modèles pré-entrainés
-    - Sur des corpus/langues
-- De nombreux modèles open weights/open source
-    - Par exemple HuggingFace
-    - Tailles, génération, ...
-- Des contraintes
-    - GPU
-    - Fenêtre de contexte
-
-:::{.callout-note}
-
-AM : Mettre plus tard?
+|         | cat | cutest | offer | premium | food |
+|:------- |:-----:|:-----:|:-----:|:-----:|:-----:|
+| doc 1 | 1|1|0|0|0|
+| doc 2 | 1|0|1|1|1| 
 
 :::
 
+## Au coeur : la représentation des textes — depuis 2017
+
+- Approches par les plongements sémantiques **grâce à des modèles pré-entraînés** _(souvent BERT)_:
+
+![A Visual Guide to Using BERT for the First Time - Jay Alammar, [source](https://jalammar.github.io/a-visual-guide-to-using-bert-for-the-first-time/)](./img/representation){fig-align="center"}
+
+Différence majeures: 
+
+- Pré-traitement moins central
+- Prise en compte du contexte dans la représentation
+- Représentation dense
+- Matériel computationnel plus lourd
+
+## Un mot sur les plongements sémantiques[^plongement]
+
+On ne se contente plus d'observer la présence de mots, on cherche à identifier leur sens dans leur contexte.
+
+[^plongement]: Ou *embeddings* avec représentation du contexte.
+
+![](./img/similarity){fig-align="center"}
+
 ## Bertopic dans tout ça ?
 
-Un package Python qui facilite la manipulation de ces distances sémantiques pour extraire des thèmes (et faire plein d'autres choses : visualiser, etc.)
+Un projet qui facilite la manipulation de ces distances sémantiques pour extraire des thèmes (et faire plein d'autres choses : visualiser, etc.). Ce projet rassemble : 
 
-![](./img/bertopicpage.png){fig-align="center"}
+- Un papier [(Grootendorst, 2022)](https://arxiv.org/abs/2203.05794)
+- [Un dépot Github](https://github.com/MaartenGr/BERTopic)
+- [Un package Python](https://pypi.org/project/bertopic/)
+- [Une documentation](https://maartengr.github.io/BERTopic/index.html)
 
-« they valued BERTopic’s ability to uncover hidden connections, emphasizing the need for meaningful, comprehensive analysis tools that support their research objectives and enhance data interpretation » ([Kaur et Wallace, 2024, p. 2](zotero://select/library/items/7PY7MLWK)) ([pdf](zotero://open-pdf/library/items/JBUIEGJE?page=2&annotation=ZZRXF56E))
+![[Documentation de BERTopic](https://maartengr.github.io/BERTopic/index.html)](./img/bertopicpage.png){fig-align="center"}
 
 ## La philosophie du package
 
-- tirer parti des embeddings / BERT
-    - `sentence-transformers`
-- réfléchir la représentation des clusters au-delà du centroid
-- des sorties graphiques visuelles faciles à intérpéter
-- favoriser la modularité
-
-Grootendorst, Maarten. 2022. « BERTopic: Neural Topic Modeling with a Class-Based TF-IDF Procedure ». arXiv:2203.05794. Prépublication, arXiv, mars 11. https://doi.org/10.48550/arXiv.2203.05794.
+- Tirer parti des embeddings / BERT (`sentence-transformers`)
+- Réfléchir la représentation des clusters au-delà du centroid
+- Produire graphiques visuelles faciles à intérpéter
+- Penser une implémentation modulaire
 
 ## Ce qu'il fait
 
@@ -132,11 +186,15 @@ Et donc de s'adapter aux enjeux spécifiques du traitement
 
 ![](./img/scopus.png){fig-align="center"}
 
+« they valued BERTopic’s ability to uncover hidden connections, emphasizing the need for meaningful, comprehensive analysis tools that support their research objectives and enhance data interpretation » ([Kaur et Wallace, 2024, p. 2](zotero://select/library/items/7PY7MLWK)) ([pdf](zotero://open-pdf/library/items/JBUIEGJE?page=2&annotation=ZZRXF56E))
+
 ## Quelques débats ... pas toujours très justes
 
 ![](img/bs-bertopiclda.png){fig-align="center"}
 
-ex *TopicGPT: A Prompt-based Topic Modeling Framework* : paramètres par défaut sans aucune réflexion sur le fonctionnement du package. <!-- AM: Je comprends pas ce que ça vient faire là dedans, je connais pas TopicGPT. ça a un lien avec BERTopic? (autre que topic modelling j'entend) -->
+:::{.notes}
+ex *TopicGPT: A Prompt-based Topic Modeling Framework* : paramètres par défaut sans aucune réflexion sur le fonctionnement du package. 
+:::
 
 ## De bonnes raisons de tester Bertopic (au moins)
 
@@ -144,7 +202,9 @@ ex *TopicGPT: A Prompt-based Topic Modeling Framework* : paramètres par défaut
 - Mobilise la puissance des modèles pré-entrainés
 - Hautement configurable pour les cas particulier
 - Tire parti des modèles BERT récents
+- Propose une documentation et des formations de qualité, en plus d'une communauté active !
 
+![](./img/commu-active.png){fig-align="center"}
 
 # Passer à la pratique
 
@@ -153,19 +213,28 @@ ex *TopicGPT: A Prompt-based Topic Modeling Framework* : paramètres par défaut
 - Un notebook (ouvrir sur [Github](https://github.com/emilienschultz/slides-bertopic/blob/main/material/notebook.ipynb), ouvrir sur [Colab](https://githubtocolab.com/emilienschultz/slides-bertopic/blob/main/material/notebook.ipynb))
 - [Corpus sur Zenodo](https://zenodo.org/records/17936091)
 
-**Pour la séance**
+### Pour la séance
 
+::: {.incremental}
 1. **Obtenir le notebook**
     - Si vous travaillez sur votre ordinateur: clonez le dépôt [https://shorturl.at/lwzAS](https://shorturl.at/lwzAS)
     - Si vous travaillez sur Colab: se rendre sur [https://shorturl.at/i0h68](https://shorturl.at/i0h68)
-    - Si SSPCloud ??
+    - Si SSPCloud, créez un compte puis un service et téléverser le notebook @emilienschultz Ajouter lien. 
 2. **Obtenir les données**<br/>
-    - se rendre sur la page Zenodo
+    - se rendre sur la page Zenodo [https://shorturl.at/UxKAk](https://shorturl.at/UxKAk)
     - Télécharger le fichier: `theses-soutenues-curated-stratified.csv` et `embeddings.zip`
     - Si local : placer les fichiers dans le dossier de travail
-    - Si Colab : téléverser les fichiers dans l'espace de travail 
+    - Si Colab ou SSPCloud: téléverser les fichiers dans l'espace de travail 
 3. **Préparer l'environnement virtuel**
     - lancer la première cellule du notebook qui télécharge les requirements et les installe. 
+:::
+
+:::{.notes}
+définir Colab
+définir Github
+définir SSPCloud
+définir Zenodo
+:::
 
 ## Le cas d'usage
 
@@ -173,8 +242,14 @@ ex *TopicGPT: A Prompt-based Topic Modeling Framework* : paramètres par défaut
     - référence les thèses défendues en France avec un abstract en français et en anglais dans la plupart des cas
     - Données textuelles de qualité: peu de retouches à faire dans les textes eux mêmes, format et longueur standardisée. *Nota, un travail de nettoyage a quand même été réalisé en amont.*
     - Des métadonnées présentes: des catégories standardisées sont renseignées pour chaque thèse. Leur qualité est inconnue.
-    - Par ailleurs, le travail sur des résumés de thèse est pratique courante (Ma et al., 2025; Ollion et al., 2025)
-- Une tâche simple: **Retrouver les disciplines explorées par les thèses défendues en France grâce au topic modelling.**
+    - Par ailleurs, le travail sur des résumés de thèse est pratique courante (Ma et al., 2025; Boelaert et al., 2025)
+
+. . .
+
+<div style="width:100%;display: flex;justify-content: center;align-items: center;font-size:larger;text-align:center;">
+**Retrouver les disciplines explorées par les thèses défendues en France grâce au topic modelling.**
+</div>
+
 
 :::{.notes}
 
@@ -193,8 +268,6 @@ Papiers cités:
     - utilisent les résumés de thèses en sociologie pour détecter les papier qui mentionnent le genre et analyser l'évolution du nombre de mention à travers les années.
 - Ma, L., Chen, R., Ge, W., Rogers, P., Lyn-Cook, B., Hong, H., Tong, W., Wu, N., & Zou, W. (2025). AI-powered topic modeling : Comparing LDA and BERTopic in analyzing opioid-related cardiovascular risks in women. Experimental Biology and Medicine, 250, 10389. https://doi.org/10.3389/ebm.2025.10389
     - utilisent le The PubMed abstract collection pour comparer les méthodes de topic modelling
-
-XXX D'autres papiers? 
 
 :::
 
@@ -251,6 +324,11 @@ topic_model.get_topic_info()
 |       8 |      13 | ['de', 'la', 'des', 'et', 'les', 'en', 'une', 'du', 'le', 'au']       |
 |       9 |      13 | ['de', 'la', 'et', 'un', 'les', 'pression', 'le', 'une', 'en', 'des'] |
 
+:::{.notes}
+- Expliquer ce qu'on voit, et pourquoi c'est intéressant, ce qu'on cherche à faire
+- Appuyer sur les documents représentatifs
+:::
+
 ## Voyons ce que ça donne - Afficher les documents dans un espace 2D
 
 On cherche à afficher les documents dans un espace 2D pour identifier la taille des clusters et leurs position relative.
@@ -263,11 +341,11 @@ topic_model.visualize_documents(docs = docs,hide_annotations = True)
 
 
 :::{.notes}
+Expliquer l'intuition, ce qu'on fait, ce qu'on voit
 
 Commenter sur le fait que c'est loooong
 
 On peut quand même déjà essayer de se repérer mais c'est pas évident
-
 :::
 
 ## Voyons ce que ça donne - Afficher les mots clefs
@@ -280,6 +358,21 @@ topic_model.visualize_barchart()
 
 ![](./img/vanilla-keywords.png){fig-align="center"}
 
+## Voyons ce que ça donne - Explorer les interactions entre les thèmes 
+
+On cherche à identifier la structure interne au modèle et les proximités entre les thèmes et comment ils s'emboitent.
+
+```python 
+topic_model.visualize_hierarchy()
+```
+
+![](./img/vanilla-hierarchical.png){fig-align="center"}
+
+. . .
+
+Cette visualisation ouvre la question de la fusion de thèmes qui est rendu possible par BERTopic. <br/>
+_On en parle au cas pas cas._
+ 
 ## Voyons ce que ça donne - Tentons d'évaluer le modèle 
 
 ```python
@@ -310,10 +403,22 @@ Marchent bien: Physique, Sciences de l'ingénieur, Informatique
 ## Conclusion de la pipeline vanilla
 
 - On a des outils utiles et qui sont rapides à mettre en place.
-- Dans l'état, on en apprend rien et on peut rien n'en faire.
+- Dans l'état, les sorties sont difficilement exploitables
+    - mots clefs bruités
+    - interaction avec le corpus ardue
 - Dans l'état il est difficile d'évaluer la pertinence du topic modelling.
 
 # Comprendre la pipeline pour obtenir de meilleurs résultats 
+
+## Après affinage, on peut obtenir des résultats très satisfaisant !
+
+Après affinage et vérification, on obtient les résultats suivants : 
+
+![](./img/final.jpg){fig-align="center"}
+
+:::{.notes}
+lancer -> montrer c'est long -> couper -> lancer avec embeddings
+:::
 
 ## Rappel de la pipeline 
 
@@ -321,86 +426,39 @@ Marchent bien: Physique, Sciences de l'ingénieur, Informatique
 
 ## Embeddings avec SBERT 
 
-- Hyperparamètres impliqués: modèle de plongement 
-- Objectif: Représenter les données textuelles en vecteurs qui permettent de rapprocher des documents sémantiquement proches.
-- Technique employée: [Sentence Transformers](https://huggingface.co/sentence-transformers) (SBERT), un package Python maintenu par [HuggingFace](https://huggingface.co/).
+Le nerf de la guerre: la représentation sémantique des textes.
 
-## Down the rabbit hole: HugginfFace c'est quoi ? 
+- [Hyperparamètres impliqués]{.highlight}: modèle de plongement 
+- [Objectif]{.highlight}: Représenter les données textuelles en vecteurs qui permettent de rapprocher des documents sémantiquement proches.
+- [Technique employée]{.highlight}: [Sentence Transformers](https://huggingface.co/sentence-transformers) (SBERT), un package Python maintenu par [HuggingFace](https://huggingface.co/). D'autres techniques sont possibles
 
-::::{.columns}
 
-::: {.column width="80%"}
+## Down the rabbit hole: HuggingFace c'est quoi ? 
 
 - 🤗 **HuggingFace**: Entreprise privée qui se place comme une plateforme d'échange autour du NLP et du Machine Learning 
 - Qu'est ce qu'on y échange: 
-    - **Des modèles**: possibilité de téléverser et télécharger des modèles, explorer les modèles en fonction de la langue la tâche etc. ainsi que consulter des benchmarks.
-    - **Des données**: possibilité de téleverser et télécharger des données.
-    - **Des conseils d'implémentation**: à travers des tutoriels, des projets exemple, de la documentation mais aussi des articles et un forum actif.
+    - [Des modèles à poids libres]{.highlight}: possibilité de téléverser et télécharger des modèles, explorer les modèles en fonction de la langue la tâche etc. ainsi que consulter des benchmarks.
+    - [Des données]{.highlight}: possibilité de téleverser et télécharger des données.
+    - [Des conseils d'implémentation]{.highlight}: à travers des tutoriels, des projets exemple, de la documentation mais aussi des articles et un forum actif.
+
+. . .
+
 - Qu'est ce qu'on peut y faire de plus?
     - Entraîner des modèles sur leur matériel
     - Héberger des modèles d'inférence sur leur matériel
 
-:::
-
-::: {.column width="20%"}
-
-![](./img/huggingface-pro.png)
-
-:::
-
-::::
-
 ## Down the rabbit hole: Modèles de plongement c'est quoi ?
 
-- **Avec les mains**: un modèle est une fonction qui accepte des textes et renvoie une représentation numérique qui encapsule la sémantique du texte. La sémantique est relative, c'est à dire qu'on mesure surtout la similarité sémantique de deux textes à travers le produit cosinus.  
-- **Dans les faits**: 
-    - Un modèle est une suite de multiplication et d'addition de matrices (les poids/biais).
-    - Les poids sont optimisés sur une tâche ayant pour but de modéliser la sémantique relative des textes. 
-    - Le résultat de cet optimisation / entraînement est un modèle pré-entraîné.
-- **Les détails d'importance**
-    - *Le pré-traitement des textes*: pas de suppression des stop-words ou de la ponctuation. On retire que ce qu'on considère comme "bruit" (balises HTML, emojis, fautes d'orthographe, ...)
-    - *La taille des textes*: les modèles ont une taille limite de textes admissibles, la **fenêtre de contexte**. 
-    - *La taille des modèle*: un gros modèle nécessite une grande puissance de calcul en CPU voire GPU.
-    - *Les tâches de prétraitement*: le choix de la tâche d'entraînement et du corpus (langue, domaine) signifie que des modèles pré-entraînés seront plus performants sur certains corpus et certaines tâches et moins sur d'autres: **Il faut tester !**
+[Avec les mains]{.highlight}: un modèle est une fonction qui accepte des textes et renvoie une représentation numérique qui encapsule la sémantique du texte. 
 
-XXX: trouver un ordre de grandeur de la taille de corpus de pré-entraînement
+**Les détails d'importance**
 
-## Down the rabbit hole: Calculer les plongements en amont - Le code  
-
-```python 
-from datasets import Dataset
-from gc import collect as gc_collect
-from sentence_transformers import SentenceTransformer
-from torch.cuda import is_available as cuda_available
-from torch.cuda import synchronize, ipc_collect, empty_cache
-
-ds = Dataset.load_from_disk("...")
-# implement your preprocess and open functions
-texts : list[str] = preprocess(ds["texts"]) 
-# Use GPU if you have one
-device = "cuda" if cuda_available() else "cpu" 
-
-sbert_model = SentenceTransformer(model_name, device = device, trust_remote_code = True)
-sbert_model.max_seq_length = min(
-    sbert_model.max_seq_length,
-    np.inf # Replace with desired window size
-)
-
-try : 
-    embeddings = sbert_model.encode(texts, device=str(device), normalize_embeddings=True, show_progress_bar=True)
-    ds = ds.add_column("embedding", list(embeddings))
-    ds.save_to_disk("embeddings")
-except Exception:
-    print(Exception)
-finally:
-    # Make sure to clean your GPU
-    del sbert_model, ds
-    empty_cache()
-    if cuda_available():
-        synchronize()
-        ipc_collect()
-    gc_collect()
-```
+:::{.incremental}
+- [Le pré-traitement des textes]{.highlight}: pas de suppression des stop-words ou de la ponctuation. On retire que ce qu'on considère comme "bruit" (balises HTML, emojis, fautes d'orthographe, ...)
+- [La taille des textes]{.highlight}: les modèles ont une taille limite de textes admissibles, la **fenêtre de contexte**. 
+- [La taille des modèle]{.highlight}: un gros modèle nécessite une grande puissance de calcul en CPU voire GPU.
+- [Les tâches de prétraitement]{.highlight}: le choix de la tâche d'entraînement et du corpus (langue, domaine) signifie que des modèles pré-entraînés seront plus performants sur certains corpus et certaines tâches et moins sur d'autres: **Il faut tester !**
+:::
 
 ## Mise à jour de la routine BERTopic  
 
@@ -450,9 +508,9 @@ Pour la suite on va utiliser `gte-multilingual-base-fr-SBERT`.
 
 ## Réduction de dimensionalité avec UMAP 
 
-- Hyperparamètres impliqués: `n_neighors` et `n_components` _(conserver `min_dist=0.`)_. 
-- Objectif: Réduire le nombre de dimension (i.e. la taille des vecteurs) pour passer de plusieurs centaines à 2-10.
-- Technique employée: UMAP _(Uniform Manifold Approximation and Projection)_, une technique qui cherche à reconstruire un réseau de distances relatives en plus basse dimension de manière itérative. D'autres techniques sont possibles: PCA ou t-SNE.
+- [Hyperparamètres impliqués]{.highlight}: `n_neighors` et `n_components` _(conserver `min_dist=0.`)_. 
+- [Objectif]{.highlight}: Réduire le nombre de dimension (i.e. la taille des vecteurs) pour passer de plusieurs centaines à 2-10.
+- [Technique employée]{.highlight}: UMAP _(Uniform Manifold Approximation and Projection)_, une technique qui cherche à reconstruire un réseau de distances relatives en plus basse dimension de manière itérative. D'autres techniques sont possibles: PCA ou t-SNE.
 
 ![UMAP Dimension Reduction, Main Ideas!!! - StatQuest with Josh Starmer [source](https://youtu.be/eN0wFzBA4Sc?si=V9QJ5UU1vFAqU6yC)](./img/umap.png)
 
@@ -493,12 +551,12 @@ topic_model.fit(documents=docs, embeddings=embeddings)
 
 :::{.callout-warning font-size="1rem"}
 
-<span style="font-size:.8rem;">Attention, en fonction de la taille du corpus, une valeur "raisonnable" de `n_neighbors` va changer !</span>
+[Attention, en fonction de la taille du corpus, une valeur "raisonnable" de `n_neighbors` va changer !]{.small}
 
-<span style="font-size:.8rem;">🚨Attention🚨 ici la représentation visuelle ne change pas, malgré qu'on ai changé `n_neighbors`. C'est normal, en réalité il y a 2 UMAP:</span>
+[🚨Attention🚨 ici la représentation visuelle ne change pas, malgré qu'on ai changé `n_neighbors`. C'est normal, en réalité il y a 2 UMAP:]{.small}
 
-- <span style="font-size:.8rem;">premier UMAP: celui appliqué sur les embeddings, qui réduit à 5 dimensions, avec la valeur de `n_neighbors` choisie, et dont les vecteurs résultants (en 5D), et sur lequel on applique l'algorithme de clustering.</span>
-- <span style="font-size:.8rem;">deuxième UMAP: celui appliqué lorsqu'on utilise la fonction `topic_model.visualize_documents`, qui réduit les embeddings à 2 dimensions, et utilise `n_neighbors=10`. D'où le fait que la visualisation ne bouge pas.</span>
+- [[premier UMAP]{.highlight}: celui appliqué sur les embeddings, qui réduit à 5 dimensions, avec la valeur de `n_neighbors` choisie, et dont les vecteurs résultants (en 5D), et sur lequel on applique l'algorithme de clustering.]{.small}
+- [[deuxième UMAP]{.highlight}: celui appliqué lorsqu'on utilise la fonction `topic_model.visualize_documents`, qui réduit les embeddings à 2 dimensions, et utilise `n_neighbors=10`. D'où le fait que la visualisation ne bouge pas.]{.small}
 
 :::
 
@@ -512,9 +570,9 @@ topic_model.fit(documents=docs, embeddings=embeddings)
 
 ## Clustering avec HDBSCAN
 
-- Hyperparamètres impliqués: `min_cluster_size`. 
-- Objectif: Créer des groupes à partir de patterns de proximité.
-- Technique employée: HDBSCAN une technique de clustering qui cherche des clusters denses sans présupposer de leur forme et en acceptant que certains points soient considérés comme "bruit". D'autres techniques sont possibles: DBSCAN, K-means.
+- [Hyperparamètres impliqués]{.highlight} : `min_cluster_size`. 
+- [Objectif]{.highlight} : Créer des groupes à partir de patterns de proximité.
+- [Technique employée]{.highlight} : HDBSCAN une technique de clustering qui cherche des clusters denses sans présupposer de leur forme et en acceptant que certains points soient considérés comme "bruit". D'autres techniques sont possibles: DBSCAN, K-means.
 
 ![HDBSCAN, Fast Density Based Clustering, the How and the Why - John Healy [source](https://youtu.be/dGsxd67IFiU?si=7pueCuUDYlxUqhZl)](./img/hdbscan.png){fig-align="center"}
 
@@ -559,9 +617,9 @@ Attention, en fonction de la taille du corpus, une valeur "raisonnable" de `min_
 
 ## Proposer des mots clefs avec CountVectorizer et c-TF-IDF 
 
-- Hyperparamètres impliqués: Retirer les stop words (`n_gram_range=(1, 1) ou (1,2)`).
-- Objectif: Identifier des mots clefs et les pondérer pour faire ressortir les mots clefs qui sont représentatifs d'un groupe et qui les différentie des autres.
-- Technique employée: Compter les mots avec CountVectorizer (scikit learn) et pondérer les scores avec c-TF-IDF. D'autres techniques sont possibles: hormis cas spécial, conserver ces blocs.
+- [Hyperparamètres impliqués]{.highlight} : Retirer les stop words (`n_gram_range=(1, 1) ou (1,2)`).
+- [Objectif]{.highlight} : Identifier des mots clefs et les pondérer pour faire ressortir les mots clefs qui sont représentatifs d'un groupe et qui les différentie des autres.
+- [Technique employée]{.highlight} : Compter les mots avec CountVectorizer (scikit learn) et pondérer les scores avec c-TF-IDF. D'autres techniques sont possibles: hormis cas spécial, conserver ces blocs.
 
 :::{.notes}
 
@@ -592,6 +650,31 @@ topic_model.fit(documents=docs, embeddings=embeddings)
 ![Sans retirer les stopwords](./img/impact-countvectorizer-sans.png){fig-align="center" width="65%"}
 
 ![En retirant les stopwords](./img/impact-countvectorizer-avec.png){fig-align="center" width="65%"}
+
+--- 
+
+![](./img/meme-tired.png)
+
+# Conclusion 
+
+## Conclusions
+
+::: {.incremental}
+- [Évaluation des modèles]{.highlight} : C'est long, il n'y a pas de framework standard. Le plus sûr c'est de **le faire à la main**.
+- [Reproductibilité]{.highlight} : Il y a des techniques pour rendre toute la pipeline! On en discute? 
+- [One _(one ?)_ more thing]{.highlight} : Il y a de nombreuses autres modèles BERTopic pour s'adapter à votre cas !
+- [Vous en voulez encore ?]{.highlight} : Tutoriel entier : [The General Inquirer in the time of LLMs: a BERTopic tutorial](https://css-polytechnique.github.io/css-ipp-materials/pages/bertopic-tutorial.html)
+:::
+
+:::{.notes}
+- recap des objectifs
+:::
+
+# Annexes 
+
+## Bibliographie
+
+- Grootendorst, M. (2022). BERTopic : Neural topic modeling with a class-based TF-IDF procedure (Version 1). arXiv. https://doi.org/10.48550/ARXIV.2203.05794
 
 
 ## Annexe : Evaluer les topic models

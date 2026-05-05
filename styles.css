@@ -1,0 +1,12 @@
+.highlight{
+    background-color: #ff165408;
+
+    border-bottom: #FF1654 solid 0.15rem;
+    padding: 0.08rem 0.4rem;
+    margin: 0rem;
+    border-radius: .2rem;
+}
+
+.small{
+    font-size:.8rem;
+}
