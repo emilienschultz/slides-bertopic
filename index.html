@@ -223,23 +223,15 @@ Axel Morin - Émilien Schultz (CREST/CSS@IPP)
 </section>
 <section id="petit-tour-de-table" class="slide level2">
 <h2>Petit tour de table</h2>
-<div style="width:100%;display: flex;justify-content: center;align-items: center;">
-<p>Qui a déjà fait du topic modeling ? Qui a de l’expérience avec les méthodes de NLP ?</p>
+<p><span class="large-center">Qui a déjà fait du topic modeling ? Qui a de l’expérience avec les méthodes de NLP ?</span></p>
+<div class="fragment">
+<p><span class="large-center">Qui a des notions en Python ?</span></p>
 </div>
 <div class="fragment">
-<div style="width:100%;display: flex;justify-content: center;align-items: center;">
-<p>Qui a des notions en Python ?</p>
-</div>
+<p><span class="large-center">Qui est à l’aise avec un notebook ?</span></p>
 </div>
 <div class="fragment">
-<div style="width:100%;display: flex;justify-content: center;align-items: center;">
-<p>Qui est à l’aise avec un notebook ?</p>
-</div>
-</div>
-<div class="fragment">
-<div style="width:100%;display: flex;justify-content: center;align-items: center;">
-<p>Avez-vous déjà en tête des objectifs ?</p>
-</div>
+<p><span class="large-center">Avez-vous déjà en tête des objectifs ?</span></p>
 </div>
 </section>
 <section id="déroulement" class="slide level2">
@@ -250,6 +242,8 @@ Axel Morin - Émilien Schultz (CREST/CSS@IPP)
 <li>Faire une analyse complète</li>
 <li>Tips avancées &amp; Discussion sur vos usages</li>
 </ul>
+<p><span class="highlight">Cas d’étude de la séance</span>:</p>
+<p><span class="large-center">Identifier les principaux thèmes de recherche à partir des résumés de thèses défendues en France.</span></p>
 </section>
 <section>
 <section id="topic-analysis-bertopic" class="title-slide slide level1 center">
@@ -258,16 +252,6 @@ Axel Morin - Émilien Schultz (CREST/CSS@IPP)
 </section>
 <section id="topic-models" class="slide level2">
 <h2>Topic models</h2>
-<!-- TODO trancher sur la formulation
-
-Nouvelle slide propale
-
-- Objectif: identifier des structures latentes thématiques dans un corpus et attribuer un ou plusieurs thème(s) par document. On utilise ces résultats pour produire des résumés et/ou des visualisations
-- Techniques employées: Algorithme Machine Learning dit *non supervisé*, plusieurs solutions: **BERTopic**, Regex, Latent Dirichlet Allocation, Non-Negative Matrix Factorization etc. 
-
-. . . 
-
-Ancienne slide  -->
 <ul>
 <li><span class="highlight">Données d’entrée</span>
 <ul>
@@ -313,6 +297,14 @@ Ancienne slide  -->
 <ul>
 <li>Illustrer chaque cas par un papier de recherche <!--TODO--> <span class="citation" data-cites="emilienschultz">@emilienschultz</span></li>
 </ul>
+<blockquote>
+<p>“Analyzing 17,848 image-text posts, we combine BERTopic, CLIP, and qualitative framing analysis to investigate how climate denialist narratives are constructed”</p>
+<p>Törnberg, A., &amp; Törnberg, P. (2025). The aesthetics of climate misinformation : Computational multimodal framing analysis with BERTopic and CLIP. Environmental Politics, 1‑24. https://doi.org/10.1080/09644016.2025.2557684</p>
+</blockquote>
+<blockquote>
+<p>“We investigate how a speaker’s preference for specific topics can be used for speaker identification”</p>
+<p>Baum, D. (2012). Recognising speakers from the topics they talk about. Speech Communication, 54(10), 1132‑1142. https://doi.org/10.1016/j.specom.2012.06.003</p>
+</blockquote>
 <style type="text/css">
         span.MJX_Assistive_MathML {
           position:absolute!important;
@@ -497,7 +489,7 @@ Ancienne slide  -->
 <li class="fragment"><strong>Obtenir le notebook</strong>
 <ul>
 <li class="fragment">Si vous travaillez sur votre ordinateur: clonez le dépôt <a href="https://shorturl.at/lwzAS">https://shorturl.at/lwzAS</a></li>
-<li class="fragment">Si vous travaillez sur Colab: se rendre sur <a href="https://shorturl.at/i0h68">https://shorturl.at/i0h68</a></li>
+<li class="fragment">Si vous travaillez sur Colab: se rendre sur <a href="https://shorturl.at/e6B3w">https://shorturl.at/e6B3w</a></li>
 <li class="fragment">Si SSPCloud, créez un compte puis un service et téléverser le notebook <span class="citation" data-cites="emilienschultz">@emilienschultz</span> Ajouter lien.</li>
 </ul></li>
 <li class="fragment"><strong>Obtenir les données</strong><br>
@@ -797,7 +789,7 @@ Ancienne slide  -->
 </section>
 <section id="après-affinage-on-peut-obtenir-des-résultats-très-satisfaisant" class="slide level2">
 <h2>Après affinage, on peut obtenir des résultats très satisfaisant !</h2>
-<p>Après affinage et vérification, on obtient les résultats suivants :</p>
+<p>Après affinage et vérification, on obtient les résultats suivants (notebook final: <a href="https://shorturl.at/YXqJ2">https://shorturl.at/YXqJ2</a>) :</p>
 
 <img data-src="./img/final.jpg" class="quarto-figure quarto-figure-center r-stretch"><aside class="notes">
 <p>lancer -&gt; montrer c’est long -&gt; couper -&gt; lancer avec embeddings</p>
@@ -862,6 +854,7 @@ Ancienne slide  -->
 </section>
 <section id="mise-à-jour-de-la-routine-bertopic" class="slide level2">
 <h2>Mise à jour de la routine BERTopic</h2>
+<p><em>Nouveau notebook avance: <a href="https://shorturl.at/m5nyE">https://shorturl.at/m5nyE</a></em></p>
 <p>On tire avantage du pré-calcul des plongements et on les fournit au topic model:</p>
 <div class="sourceCode" id="cb7"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href=""></a><span class="im">from</span> datasets <span class="im">import</span> load_from_disk</span>
 <span id="cb7-2"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np </span>
