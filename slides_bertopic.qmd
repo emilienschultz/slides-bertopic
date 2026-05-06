@@ -210,7 +210,7 @@ ex *TopicGPT: A Prompt-based Topic Modeling Framework* : paramètres par défaut
 ::: {.incremental}
 1. **Obtenir le notebook**
     - Si vous travaillez sur votre ordinateur: clonez le dépôt [https://shorturl.at/lwzAS](https://shorturl.at/lwzAS)
-    - Si vous travaillez sur Colab: se rendre sur [https://shorturl.at/fk2HW](https://shorturl.at/fk2HW)
+    - Si vous travaillez sur Colab: se rendre sur [https://shorturl.at/7Q3c2](https://shorturl.at/7Q3c2)
     - Si SSPCloud, créez un compte puis un service et téléverser le notebook.
 2. **Obtenir les données**<br/>
     - se rendre sur la page Zenodo [https://shorturl.at/UxKAk](https://shorturl.at/UxKAk)
@@ -402,7 +402,7 @@ Marchent bien: Physique, Sciences de l'ingénieur, Informatique
 
 ## Après affinage, on peut obtenir des résultats très satisfaisant !
 
-Après affinage et vérification, on obtient les résultats suivants (notebook final: [https://shorturl.at/YXqJ2](https://shorturl.at/YXqJ2)) : 
+Après affinage et vérification, on obtient les résultats suivants : 
 
 ![](./img/final.jpg){fig-align="center"}
 
@@ -452,7 +452,7 @@ Le nerf de la guerre: la représentation sémantique des textes.
 
 ## Mise à jour de la routine BERTopic  
 
-_Nouveau notebook avance: [https://shorturl.at/lQSkQ](https://shorturl.at/lQSkQ)_
+_Nouveau notebook avance: [https://shorturl.at/3lko9](https://shorturl.at/3lko9)_
 
 On tire avantage du pré-calcul des plongements et on les fournit au topic model: 
 
