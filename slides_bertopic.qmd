@@ -24,27 +24,19 @@ format:
 
 ## Petit tour de table
 
-<div style="width:100%;display: flex;justify-content: center;align-items: center;">
-Qui a déjà fait du topic modeling ? Qui a de l'expérience avec les méthodes de NLP ? 
-</div>
+[Qui a déjà fait du topic modeling ? Qui a de l'expérience avec les méthodes de NLP ? ]{.large-center}
 
 . . .
 
-<div style="width:100%;display: flex;justify-content: center;align-items: center;">
-Qui a des notions en Python ?
-</div>
+[Qui a des notions en Python ?]{.large-center}
 
 . . .
 
-<div style="width:100%;display: flex;justify-content: center;align-items: center;">
-Qui est à l'aise avec un notebook ?
-</div>
+[Qui est à l'aise avec un notebook ?]{.large-center}
 
 . . .
 
-<div style="width:100%;display: flex;justify-content: center;align-items: center;">
-Avez-vous déjà en tête des objectifs ?
-</div>
+[Avez-vous déjà en tête des objectifs ?]{.large-center}
 
 ## Déroulement
 
@@ -53,22 +45,13 @@ Avez-vous déjà en tête des objectifs ?
 - Faire une analyse complète
 - Tips avancées & Discussion sur vos usages
 
+[Cas d'étude de la séance]{.highlight}: 
+
+[Identifier les principaux thèmes de recherche à partir des résumés de thèses défendues en France.]{.large-center}
 
 # Topic analysis & Bertopic
 
 ## Topic models
-
-<!-- TODO trancher sur la formulation
-
-Nouvelle slide propale
-
-- Objectif: identifier des structures latentes thématiques dans un corpus et attribuer un ou plusieurs thème(s) par document. On utilise ces résultats pour produire des résumés et/ou des visualisations
-- Techniques employées: Algorithme Machine Learning dit *non supervisé*, plusieurs solutions: **BERTopic**, Regex, Latent Dirichlet Allocation, Non-Negative Matrix Factorization etc. 
-
-. . . 
-
-Ancienne slide  -->
-
 
 - [Données d'entrée]{.highlight}
     - Un corpus +/- grand de textes
@@ -99,6 +82,15 @@ Une interface quanti (corpus) / quali (thèmes)
 
 - Illustrer chaque cas par un papier de recherche <!--TODO-->
 @emilienschultz
+
+> "Analyzing 17,848 image-text posts, we combine BERTopic, CLIP, and qualitative framing analysis to investigate how climate denialist narratives are constructed"
+> 
+> Törnberg, A., & Törnberg, P. (2025). The aesthetics of climate misinformation : Computational multimodal framing analysis with BERTopic and CLIP. Environmental Politics, 1‑24. https://doi.org/10.1080/09644016.2025.2557684
+
+> "We investigate how a speaker’s preference for specific topics can be used for speaker identification"
+> 
+> Baum, D. (2012). Recognising speakers from the topics they talk about. Speech Communication, 54(10), 1132‑1142. https://doi.org/10.1016/j.specom.2012.06.003
+
 
 ::: 
 
@@ -218,13 +210,11 @@ ex *TopicGPT: A Prompt-based Topic Modeling Framework* : paramètres par défaut
 ::: {.incremental}
 1. **Obtenir le notebook**
     - Si vous travaillez sur votre ordinateur: clonez le dépôt [https://shorturl.at/lwzAS](https://shorturl.at/lwzAS)
-    - Si vous travaillez sur Colab: se rendre sur [https://shorturl.at/i0h68](https://shorturl.at/i0h68)
-    - Si SSPCloud, créez un compte puis un service et téléverser le notebook @emilienschultz Ajouter lien. 
+    - Si vous travaillez sur Colab: se rendre sur [https://shorturl.at/fk2HW](https://shorturl.at/fk2HW)
+    - Si SSPCloud, créez un compte puis un service et téléverser le notebook.
 2. **Obtenir les données**<br/>
     - se rendre sur la page Zenodo [https://shorturl.at/UxKAk](https://shorturl.at/UxKAk)
-    - Télécharger le fichier: `theses-soutenues-curated-stratified.csv` et `embeddings.zip`
-    - Si local : placer les fichiers dans le dossier de travail
-    - Si Colab ou SSPCloud: téléverser les fichiers dans l'espace de travail 
+    - Télécharger le fichier: `embeddings.zip`
 3. **Préparer l'environnement virtuel**
     - lancer la première cellule du notebook qui télécharge les requirements et les installe. 
 :::
@@ -461,6 +451,8 @@ Le nerf de la guerre: la représentation sémantique des textes.
 :::
 
 ## Mise à jour de la routine BERTopic  
+
+_Nouveau notebook avance: [https://shorturl.at/lQSkQ](https://shorturl.at/lQSkQ)_
 
 On tire avantage du pré-calcul des plongements et on les fournit au topic model: 
 
