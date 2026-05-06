@@ -210,13 +210,11 @@ ex *TopicGPT: A Prompt-based Topic Modeling Framework* : paramètres par défaut
 ::: {.incremental}
 1. **Obtenir le notebook**
     - Si vous travaillez sur votre ordinateur: clonez le dépôt [https://shorturl.at/lwzAS](https://shorturl.at/lwzAS)
-    - Si vous travaillez sur Colab: se rendre sur [https://shorturl.at/e6B3w](https://shorturl.at/e6B3w)
-    - Si SSPCloud, créez un compte puis un service et téléverser le notebook @emilienschultz Ajouter lien. 
+    - Si vous travaillez sur Colab: se rendre sur [https://shorturl.at/fk2HW](https://shorturl.at/fk2HW)
+    - Si SSPCloud, créez un compte puis un service et téléverser le notebook.
 2. **Obtenir les données**<br/>
     - se rendre sur la page Zenodo [https://shorturl.at/UxKAk](https://shorturl.at/UxKAk)
-    - Télécharger le fichier: `theses-soutenues-curated-stratified.csv` et `embeddings.zip`
-    - Si local : placer les fichiers dans le dossier de travail
-    - Si Colab ou SSPCloud: téléverser les fichiers dans l'espace de travail 
+    - Télécharger le fichier: `embeddings.zip`
 3. **Préparer l'environnement virtuel**
     - lancer la première cellule du notebook qui télécharge les requirements et les installe. 
 :::
@@ -454,7 +452,7 @@ Le nerf de la guerre: la représentation sémantique des textes.
 
 ## Mise à jour de la routine BERTopic  
 
-_Nouveau notebook avance: [https://shorturl.at/m5nyE](https://shorturl.at/m5nyE)_
+_Nouveau notebook avance: [https://shorturl.at/lQSkQ](https://shorturl.at/lQSkQ)_
 
 On tire avantage du pré-calcul des plongements et on les fournit au topic model: 
 
