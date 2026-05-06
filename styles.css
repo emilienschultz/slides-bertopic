@@ -10,3 +10,16 @@
 .small{
     font-size:.8rem;
 }
+
+.large-center{
+    width:100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    margin: 2rem;
+
+    font-size: larger;
+    font-weight: bold;
+    text-align: center;
+}
