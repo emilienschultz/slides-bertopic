@@ -73,26 +73,14 @@ format:
 ## Quand les utiliser ?
 
 - [Exploratoire]{.highlight} : avoir une vision générale de son corpus (surtout quand il est large), identifier les outlayers, mieux anticiper le filtrage, ...
-- [En cours d'analyse]{.highlight} : sélectionner une diversité de source, avoir des catégories pour annoter ses éléments, ...
-- [Confirmatoire]{.highlight} : mettre à l'épreuve un cadre d'analyse
+    - [Bizel-Bizellot, Gaston, et al.. 2024. « Extracting Circumstances of Covid-19 Transmission from Free Text with Large Language Models ».](https://doi.org/10.2139/ssrn.4819301)
+- [En cours d'analyse]{.highlight} : sélectionner une diversité de source, avoir des catégories pour annoter ses éléments
+    - [Raman, Raghu, et al. 2024. « Unveiling the Dynamics of AI Applications: A Review of Reviews Using Scientometrics and BERTopic Modeling ». Journal of Innovation & Knowledge 9 (3): 100517.](https://doi.org/10.1016/j.jik.2024.100517)
+- [Confirmatoire]{.highlight}
+    - [Törnberg, A., & Törnberg, P. (2025). The aesthetics of climate misinformation : Computational multimodal framing analysis with BERTopic and CLIP. Environmental Politics, 1‑24.](https://doi.org/10.1080/09644016.2025.2557684)
 
 Une interface quanti (corpus) / quali (thèmes)
 
-:::{.notes}
-
-- Illustrer chaque cas par un papier de recherche <!--TODO-->
-@emilienschultz
-
-> "Analyzing 17,848 image-text posts, we combine BERTopic, CLIP, and qualitative framing analysis to investigate how climate denialist narratives are constructed"
-> 
-> Törnberg, A., & Törnberg, P. (2025). The aesthetics of climate misinformation : Computational multimodal framing analysis with BERTopic and CLIP. Environmental Politics, 1‑24. https://doi.org/10.1080/09644016.2025.2557684
-
-> "We investigate how a speaker’s preference for specific topics can be used for speaker identification"
-> 
-> Baum, D. (2012). Recognising speakers from the topics they talk about. Speech Communication, 54(10), 1132‑1142. https://doi.org/10.1016/j.specom.2012.06.003
-
-
-::: 
 
 ## Des familles très différentes
 
