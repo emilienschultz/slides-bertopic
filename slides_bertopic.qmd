@@ -12,9 +12,9 @@ format:
 
 ## Objectifs
 
-- Un package Python spécifique : **Bertopic**
-- Prétexte de parler des LLMs et de la représentation sémantique
-- Et mettre la main à la pâte
+- Un package *Python* spécifique : **Bertopic**
+- Prétexte pour parler des LLMs et de la représentation sémantique
+- Et mettre la main à la pâte (en Python)
     - Appréhender la pipeline et se familiariser avec les grandes étapes 
     - Identifier les lignes de codes clefs 
     - Identifier les ressources de formation disponibles 
@@ -73,7 +73,7 @@ format:
 ## Quand les utiliser ?
 
 - [Exploratoire]{.highlight} : avoir une vision générale de son corpus (surtout quand il est large), identifier les outlayers, mieux anticiper le filtrage, ...
-    - [Bizel-Bizellot, Gaston, et al.. 2024. « Extracting Circumstances of Covid-19 Transmission from Free Text with Large Language Models ».](https://doi.org/10.2139/ssrn.4819301)
+    - [Bizel-Bizellot, Gaston, Simon Galmiche, Benoît Lelandais, et al. 2025. « Extracting Circumstances of Covid-19 Transmission from Free Text with Large Language Models ». Nature Communications 16 (1): 5836.](https://doi.org/10.1038/s41467-025-60762-w.)
 - [En cours d'analyse]{.highlight} : sélectionner une diversité de source, avoir des catégories pour annoter ses éléments
     - [Raman, Raghu, et al. 2024. « Unveiling the Dynamics of AI Applications: A Review of Reviews Using Scientometrics and BERTopic Modeling ». Journal of Innovation & Knowledge 9 (3): 100517.](https://doi.org/10.1016/j.jik.2024.100517)
 - [Confirmatoire]{.highlight}
@@ -679,17 +679,3 @@ Une histoire compliquée « standard metrics may not reliably reflect human perc
 ## Annexe : Utiliser ActiveTigger
 
 ![](img/at.png){fig-align="center"}
-
-
-# Mettre en forme son corpus
-
-## Avant Bertopic
-
-- Des documents dans des formats différents
-- Des longueurs variables
-    - Limite de la fenêtre de contexte
-- Du nettoyage à faire
-
----
-
-## Comment découper son corpus ?
